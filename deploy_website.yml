@@ -5,10 +5,10 @@
   become: yes
 
   vars:
-    git_base: https://github.com/TechXchangeNL/website.git
+    git_base: https://github.com/TechXchangeNL
 
   tasks:
   - name: Copy the code from repository
     git:
-      repo: "{{ git_base }}/website_demo.git"
+      repo: "{{ git_base }}/website.git"
       dest: /var/www/html/
