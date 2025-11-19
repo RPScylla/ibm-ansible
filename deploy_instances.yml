@@ -1,7 +1,7 @@
 - name: HCP
   hosts: all
   tasks:
-  - name: Execute a terraform plan
+  - name: Apply a terraform plan
     hashicorp.terraform.run:
       organization: "TechXchangeNL"
       workspace: "{{ workspace }}"
