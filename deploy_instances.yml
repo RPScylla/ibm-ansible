@@ -6,14 +6,12 @@
       organization: "TechXchangeNL"
       workspace: "{{ workspace }}"
       run_message: "Apply infrastructure changes"
-      # plan_only: true
       auto_apply: true
       tf_timeout: 6000
       poll: true
       poll_interval: 5
       poll_timeout: 1200
       state: "present"
-    # timeout: 10000
     register: result
 
   - name: show result
