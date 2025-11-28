@@ -38,11 +38,11 @@ note: wherever you can and/or need to specify an Organisation, choose "TechXchan
 You need to create a project in AAP. The project is your repository with playbooks.
 - The location of the git repo with the platybooks for this workshop: [here](https://github.com/TechXchangeNL/ansible.git)
 
-### Credentials
+### Controller Credentials
 Apart from the already available machine credential, you need a few more..
 
-- A Credential to be able to communicate with Hashicorp Terraform Cloud. Use Credential Type "Hashicorp Terraform Cloud" and the provided token in HCP.
-- A Credential to be able to sync the Terraform State File that will be used for the inventory source. Choose the credential type "Terraform backend configuration". In the backend configuration field enter the following:
+- A Controller Credential to be able to communicate with Hashicorp Terraform Cloud. Use Credential Type "Hashicorp Terraform Cloud" and the provided token in HCP.
+- A Controller Credential to be able to sync the Terraform State File that will be used for the inventory source. Choose the credential type "Terraform backend configuration". In the backend configuration field enter the following:
 
   ```text
   hostname = "app.terraform.io"  
@@ -52,6 +52,12 @@ Apart from the already available machine credential, you need a few more..
   ```
   For token, enter the token provided in HCP
   For workspace enter the workspace you made in Terraform (you did...right?)
+
+### EDA Credentials
+For the new HCP Terraform _Actions_ feature we need to configure EDA and thus EDA Credentials. These are made under `Automation Decisions > Infrastructure > Credentials` We need two:
+- A credential to enable EDA rulebook actions to lauch job templates and workflows in the Controller. It needs to be of type `Red Hat Ansible Automation Platform` Use your provided username and password and the url `https://caap.fvz.ansible-labs.de/api/controller`
+- A credential that HCP Terraform Actions will use to be able to send events to EDA. It needs to be of type `Basic Event Stream`. You can camoe up with any username and password as long as you remember them for when they are needed to configure the HCP Terraform Action.
+
 
 ### Inventories
 Create an inventory called "TechXchangeNL" and add a dynamic inventory source to it named "Terraform". This source needs a special plugin and some configuration to do the magic of syncing the statefile. The plugin is in the provided execution environment and the config that you need to give in the _Source Variables_ are:
@@ -68,7 +74,7 @@ keyed_groups:
   - prefix: role
     key: tags.Role
 ```
-Also, you need the Terraform Backend Configuration Credential you made as the credential for this source. You can test it by syncing the source manually. Finally you need to enable _update on launch_ on the inventory source.
+Also, you need the Terraform Backend Configuration Credential you made as the credential for this source. You can test it by syncing the source manually. Do NOT enable _update on launch_.
 
 ### Job Templates
 Now that you have the basics set up (project, credential, inventory), you can define job templates in AAP. As you can see in the repository where this text lives, there are 4 playbooks:
