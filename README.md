@@ -5,23 +5,23 @@
 - What is my username? -> It is the email address you gave us when you signed up for this workshop
 - What is my password? -> It's on the whiteboard in the workshop room (after you log in you can change your password if you want)
 
-Ansible Automation Platform (AAP) has the notion of "Organizations". For this workshop an Organization named TechXchangeNL has been made and your account is part of that. Everything you do you will do within that organisation.
+
 
 This workshop has been designed such that **you** will need to do most of the work, signifying the word "work" in workshop ;-) This means we only have the absolute basics set up and you need to build all the components to make everything work.
 
-The division of work between Hashicorp Terraform Cloud and Ansible Automation Platform (as likely already explained to you) is:
-- Terraform: Building up and changing infrastructure in the cloud, among which are RHEL10 servers
-- AAP: Configure the RHEL10 servers to become a webserver serving a website
+The division of work between HCP and AAP (as likely already explained to you) is:
+- HCP: Building up and changing infrastructure in the cloud, among which are RHEL10 servers
+- AAP: Configure the servers to become a webserver serving a website
 
-This means Terraform has all the credentials needed to do it's thing in the cloud of choice (AWS).
-AAP will use the integrations with Terraform to be able to do it's thing on the provisioned infrastructure. AAP has no credentials for the cloud!
+This seperation of concerns means HCP has all the credentials needed to do it's thing in the cloud of choice (AWS) and AAP has no credentials nor visibility in the cloud infrastructure. AAP uses the integrations with HCP to be able to do it's thing on the provisioned infrastructure.
 
 So what are the basics we have set up for you:
-1. A machine credential named RHEL. You use this machine credential to be able to run your playbooks on the providioned servers.
-2. A Custom Credential _Type_ called `Hashicorp Terraform Cloud`. You use this later to create your credential. See [here](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_hashicorp_and_ansible_automation_platform/terraform-product#creating-custom-credential-type) for details.
-3. An Inventory called `local` with the host `localhost` for api based automations.
-4. A token to be able to do stuff in Hashicorp Terraform Cloud. This token is available as a var in HCP.
-5. An Execution Environment called `ee-tech-x-change-nl` in AAP that provides all the collections and dependencies you need in this workshop.
+1. AAP has the notion of _Organizations_. For this workshop an Organization named `TechXchangeNL` has been made and you will work within that organization.
+2. A _Machine Credential_ named `RHEL`. You use this machine credential to be able to run your playbooks on the provisioned servers. HCP deploys the keys inside this credential to the cloud.
+3. A _Custom Credential Type_ called `Hashicorp Terraform Cloud`. You will use this later to create your own credential of this type. See [here](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_hashicorp_and_ansible_automation_platform/terraform-product#creating-custom-credential-type) for details.
+4. An _Inventory_ called `local` with the host `localhost` for api based automations. Playbooks that use an api for their work typically use localhost.
+5. A _token_ to be able to do stuff in Hashicorp Terraform Cloud. This token is available as a var in HCP.
+6. An _Execution Environment_ called `ee-tech-x-change-nl` in AAP that provides all the collections and dependencies you need in this workshop.
 
 
 ## Collections
