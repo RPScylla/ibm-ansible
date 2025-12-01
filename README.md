@@ -42,8 +42,8 @@ You need to create a project in AAP. The project is your repository with playboo
 ### Controller Credentials
 Apart from the already available machine credential, you need a few more..
 
-- A Controller Credential to be able to communicate with Hashicorp Terraform Cloud. Use Credential Type `Hashicorp Terraform Cloud` and the provided token in HCP.
-- A Controller Credential to be able to sync the Terraform State File that will be used for the inventory source. Choose the credential type `Terraform backend configuration`. In the backend configuration field enter the following:
+- A Credential to be able to communicate with Hashicorp Terraform Cloud. Use Credential Type `Hashicorp Terraform Cloud` and the provided token in a var in HCP.
+- A Credential to be able to sync the Terraform State File that will be used for the inventory source. Choose the credential type `Terraform backend configuration`. In the backend configuration field enter the following:
 
   ```text
   hostname = "app.terraform.io"  
@@ -51,11 +51,11 @@ Apart from the already available machine credential, you need a few more..
   token = "YOURTOKENHERE"  
   workspaces { name = "YOURWORKSPACE" }  
   ```
-  For token, enter the token provided in HCP
+  For token, again, enter the token provided in a var in HCP
   For workspace enter the workspace you made in Terraform (you did...right?)
 
 ### Inventories
-Create an inventory called "TechXchangeNL" and add a dynamic inventory source to it named "Terraform". This source is of type `Terraform State` and needs some configuration to do the magic of syncing the statefile. Use the provided execution environment and the config that you need to give in the `Source Variables` are:
+Create an inventory called "TechXchangeNL" and add a dynamic inventory source to it named "Terraform". This source is of type `Terraform State` and needs some configuration to do the magic of syncing the statefile. Use the provided execution environment `ee-tech-x-change-nl` and the config that you need to give in the `Source Variables` are:
 ```text
 plugin: cloud.terraform.terraform_state
 backend_type: remote
