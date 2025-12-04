@@ -2,4 +2,9 @@
   hosts: all
   tasks:
   - name: Apply a terraform plan
-
+    hashicorp.terraform.run:
+      # workspace: "my-app-workspace"
+      # organization: "my-org"
+      run_message: "Apply from ansible"
+      auto_apply: true
+    state: "present"
