@@ -3,8 +3,9 @@
   tasks:
   - name: Apply a terraform plan
     hashicorp.terraform.run:
-      # workspace: "my-app-workspace"
-      # organization: "my-org"
+      workspace_id: "ws-9r9J2E8BSLTb5pth"
       run_message: "Apply from ansible"
       auto_apply: true
-    state: "present"
+      tf_timeout: 6000
+      poll_interval: 5
+      poll_timeout: 1200
